@@ -81,7 +81,7 @@
     "name_meaning": "Self-Knowledge and Enlightenment",
     "name_translation": "Gyaan Vigyana Yoga",
     "verses_count": 30,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_2.json"
   },
   {
     "chapter_number": 8,
@@ -93,7 +93,7 @@
     "name_meaning": "Path of the Eternal God",
     "name_translation": "Akshara Brahma Yoga",
     "verses_count": 28,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_3.json"
   },
   {
     "chapter_number": 9,
@@ -105,7 +105,7 @@
     "name_meaning": "Yoga through the King of Sciences",
     "name_translation": "Raja Vidya Yoga",
     "verses_count": 34,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_4.json"
   },
   {
     "chapter_number": 10,
@@ -117,7 +117,7 @@
     "name_meaning": "Yoga through Appreciating the Infinite Opulences of God",
     "name_translation": "Vibhooti Yoga",
     "verses_count": 42,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_5.json"
   },
   {
     "chapter_number": 11,
@@ -141,7 +141,7 @@
     "name_meaning": "The Yoga of Devotion",
     "name_translation": "Bhakti Yoga",
     "verses_count": 20,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_2.json"
   },
   {
     "chapter_number": 13,
@@ -153,7 +153,7 @@
     "name_meaning": "Yoga through Distinguishing the Field and the Knower of the Field",
     "name_translation": "Ksetra Ksetrajna Vibhaaga Yoga",
     "verses_count": 35,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_3.json"
   },
   {
     "chapter_number": 14,
@@ -165,7 +165,7 @@
     "name_meaning": "Yoga through Understanding the Three Modes of Material Nature",
     "name_translation": "Gunatraya Vibhaga Yoga",
     "verses_count": 27,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_4.json"
   },
   {
     "chapter_number": 15,
@@ -177,7 +177,7 @@
     "name_meaning": "The Yoga of the Supreme Divine Personality",
     "name_translation": "Purushottama Yoga",
     "verses_count": 20,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_5.json"
   },
   {
     "chapter_number": 16,
@@ -201,7 +201,7 @@
     "name_meaning": "Yoga through Discerning the Three Divisions of Faith",
     "name_translation": "Sraddhatraya Vibhaga Yoga",
     "verses_count": 28,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_2.json"
   },
   {
     "chapter_number": 18,
@@ -213,6 +213,6 @@
     "name_meaning": "Yoga through the Perfection of Renunciation and Surrender",
     "name_translation": "Moksha Sanyaas Yoga",
     "verses_count": 78,
-    "json_path": "lib/utils/json/chapter_1.json"
+    "json_path": "lib/utils/json/chapter_3.json"
   }
 ]

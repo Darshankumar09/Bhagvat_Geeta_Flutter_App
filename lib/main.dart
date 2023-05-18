@@ -1,4 +1,6 @@
+import 'package:bhagvat_geeta/controllers/providers/json_decode_provider.dart';
 import 'package:bhagvat_geeta/models/theme_model.dart';
+import 'package:bhagvat_geeta/views/screens/AllVersesPage.dart';
 import 'package:bhagvat_geeta/views/screens/ChapterDetailPage.dart';
 import 'package:bhagvat_geeta/views/screens/ShlokDetailPage.dart';
 import 'package:bhagvat_geeta/views/screens/SplashScreen.dart';
@@ -25,6 +27,12 @@ void main() async {
             ),
           ),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ChapterJsonDecodeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ShlokJsonDecodeProvider(),
+        ),
       ],
       builder: (context, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -37,6 +45,7 @@ void main() async {
           '/': (context) => const SplashScreen(),
           'Home_Page': (context) => const HomePage(),
           'chapter_detail_page': (context) => const ChapterDetailPage(),
+          'all_verses_page': (context) => const AllVersesPage(),
           'shlok_detail_page': (context) => const ShlokDetailPage(),
         },
       ),

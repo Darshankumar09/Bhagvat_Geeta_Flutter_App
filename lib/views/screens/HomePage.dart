@@ -1,9 +1,7 @@
-import 'dart:convert';
-
+import 'package:bhagvat_geeta/controllers/providers/json_decode_provider.dart';
 import 'package:bhagvat_geeta/controllers/providers/theme_provider.dart';
-import 'package:bhagvat_geeta/models/all_chapters_model.dart';
+import 'package:bhagvat_geeta/models/json_decode_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,8 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? data;
-
   @override
   void initState() {
     super.initState();
@@ -23,25 +19,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> loadJSON() async {
-    data = await rootBundle.loadString('lib/utils/json/all_chapters.json');
-
-    List decodedList = jsonDecode(data!);
-    setState(() {});
-
-    allChapters = decodedList
-        .map(
-          (e) => AllChapterModel.fromMap(
-            data: e,
-          ),
-        )
-        .toList();
+    await Provider.of<ChapterJsonDecodeProvider>(context, listen: false)
+        .loadJSON();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bhagavad Geeta"),
+        title: const Text("Bhagavat Geeta"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -54,44 +40,33 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
+      body: ListView.builder(
+        itemCount: Provider.of<ChapterJsonDecodeProvider>(context)
+            .chapterJsonDecodeModel
+            .allChapter
+            .length,
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 4,
+        ),
+        itemBuilder: (context, index) => Card(
+          child: ListTile(
+            onTap: () {
+              chapterIndex = index;
+              Navigator.of(context).pushNamed("chapter_detail_page");
+            },
+            leading: Text(
+                "${Provider.of<ChapterJsonDecodeProvider>(context, listen: false).chapterJsonDecodeModel.allChapter[index].id}"),
+            title: Text(
+                Provider.of<ChapterJsonDecodeProvider>(context, listen: false)
+                    .chapterJsonDecodeModel
+                    .allChapter[index]
+                    .nameHindi),
+            subtitle: Text(
+                "Verses : ${Provider.of<ChapterJsonDecodeProvider>(context, listen: false).chapterJsonDecodeModel.allChapter[index].versesCount}"),
+            trailing: const Icon(Icons.arrow_forward_ios_outlined),
           ),
-          itemCount: allChapters.length,
-          itemBuilder: (context, i) {
-            return GestureDetector(
-              onTap: () {
-                chapterIndex = i;
-                Navigator.of(context).pushNamed("chapter_detail_page");
-              },
-              child: Column(
-                children: [
-                  Container(
-                    height: 140,
-                    width: 140,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                            "assets/images/${allChapters[i].imageName}.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(allChapters[i].nameHindi),
-                ],
-              ),
-            );
-          },
         ),
       ),
     );

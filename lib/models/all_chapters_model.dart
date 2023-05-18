@@ -39,5 +39,3 @@ class AllChapterModel {
   }
 }
 
-int chapterIndex = 0;
-List<AllChapterModel> allChapters = [];

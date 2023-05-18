@@ -1,9 +1,7 @@
-import 'dart:convert';
-
-import 'package:bhagvat_geeta/models/all_chapters_model.dart';
-import 'package:bhagvat_geeta/models/chapter_model.dart';
+import 'package:bhagvat_geeta/controllers/providers/json_decode_provider.dart';
+import 'package:bhagvat_geeta/models/json_decode_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class ChapterDetailPage extends StatefulWidget {
   const ChapterDetailPage({Key? key}) : super(key: key);
@@ -13,8 +11,6 @@ class ChapterDetailPage extends StatefulWidget {
 }
 
 class _ChapterDetailPageState extends State<ChapterDetailPage> {
-  String? data;
-
   @override
   void initState() {
     super.initState();
@@ -22,40 +18,107 @@ class _ChapterDetailPageState extends State<ChapterDetailPage> {
   }
 
   Future<void> loadJSON() async {
-    data = await rootBundle.loadString(allChapters[chapterIndex].jsonPath);
-
-    List decodedList = jsonDecode(data!);
-    setState(() {});
-
-    allShloks = decodedList
-        .map(
-          (e) => ChapterModel.fromMap(data: e),
-        )
-        .toList();
+    await Provider.of<ShlokJsonDecodeProvider>(context, listen: false).loadJSON(
+        Provider.of<ChapterJsonDecodeProvider>(context, listen: false)
+            .chapterJsonDecodeModel
+            .allChapter);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(allChapters[chapterIndex].nameTranslationEnglish),
-      ),
-      body: ListView.builder(
-        itemCount: allShloks.length,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => ListTile(
-          onTap: () {
-            shlokIndex = index;
-            Navigator.of(context).pushNamed("shlok_detail_page");
+        title: Text(
+          Provider.of<ChapterJsonDecodeProvider>(context, listen: false)
+              .chapterJsonDecodeModel
+              .allChapter[chapterIndex]
+              .nameTranslationEnglish,
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
           },
-          leading: Text(
-            allShloks[index].verse,
-            style: const TextStyle(
-              fontSize: 16,
-            ),
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/${Provider.of<ChapterJsonDecodeProvider>(context, listen: false).chapterJsonDecodeModel.allChapter[chapterIndex].imageName}.jpg',
+                      ),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                "Name Meaning",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                Provider.of<ChapterJsonDecodeProvider>(context, listen: false)
+                    .chapterJsonDecodeModel
+                    .allChapter[chapterIndex]
+                    .nameMeaning,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Summary",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                Provider.of<ChapterJsonDecodeProvider>(context, listen: false)
+                    .chapterJsonDecodeModel
+                    .allChapter[chapterIndex]
+                    .chapterSummaryEnglish,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('all_verses_page');
+                  },
+                  child: const Text("All Verses"),
+                ),
+              ),
+            ],
           ),
-          title: Text(allShloks[index].sanskrit),
-          contentPadding: const EdgeInsets.all(16),
         ),
       ),
     );

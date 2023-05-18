@@ -4,6 +4,7 @@ class ChapterModel {
   String english;
   String gujarati;
   String hindi;
+  String? translation;
 
   ChapterModel({
     required this.verse,
@@ -11,6 +12,7 @@ class ChapterModel {
     required this.english,
     required this.gujarati,
     required this.hindi,
+    this.translation,
   });
 
   factory ChapterModel.fromMap({required Map data}) {
@@ -23,6 +25,3 @@ class ChapterModel {
     );
   }
 }
-
-int shlokIndex = 0;
-List<ChapterModel> allShloks = [];
