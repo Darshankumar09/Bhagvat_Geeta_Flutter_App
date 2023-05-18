@@ -38,4 +38,4 @@ making the app inclusive and accessible to a wider audience.
 
 ## Project Output :
 
-https://github.com/Darshankumar09/Bhagvat_Geeta_Flutter_App/assets/116517559/084e532d-db53-41e3-877c-f4fae8195c71
+https://github.com/Darshankumar09/Bhagvat_Geeta_Flutter_App/assets/116517559/b0366283-2338-4c17-83a0-5634b470c4e8
